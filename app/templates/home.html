@@ -12,12 +12,13 @@
    </div>
    <div class="panel-body">
     {%if person%}
-     <div class="alert alert-warning">Get you RAW Response here: <a href="/{{person.uuid}}">My Personal Credentials</a></div>
+    <div class="alert alert-warning">Get you RAW Response here: <a href="/{{person.uuid}}" target="_blank">Raw Credentials</a></div>
+     <div class="alert alert-success">Download RAW Response here: <a href="#" id="downloadJSON">Download Safe Credentials</a></div>
     {%endif%}
     {%if person%}
-      <form action="/editData/" class="form form-horizontal" action="index.html" method="post">
+      <form action="/editData/" class="form form-horizontal" method="post">
     {%else%}
-      <form action="/submitData/" class="form form-horizontal" action="index.html" method="post">
+      <form action="/submitData/" class="form form-horizontal" method="post">
     {%endif%}
       {%csrf_token%}
       <div class="col-lg-6">
@@ -79,4 +80,30 @@
   </div>
  </div>
 </div>
+
+{%if person%}
+<script type="text/javascript">
+ var obj = {
+  'name' : '{{person.name}}',
+  'email' : '{{person.email}}',
+  'phone' : '{{person.phone}}',
+  'address' : '{{person.address}}',
+  'country' : '{{person.country}}',
+  'birth' : '{{person.birth}}',
+ };
+ var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
+
+ var a = document.getElementById('downloadJSON');
+ a.href = 'data:' + data;
+ a.download = 'cred-manager.json';
+
+ if(window.location.pathname.indexOf('{{person.uuid}}') == -1){
+  window.location.href = '/{{person.uuid}}?edit=1';
+ } else {
+  console.debug("Verified url");
+ }
+
+
+</script>
+{%endif%}
 {%endblock%}

@@ -16,7 +16,7 @@ def editData(request):
     country = request.POST.get('country')
     birth = request.POST.get('birth')
 
-    person, created = Prson.objects.get_or_create(email = email)
+    person, created = Person.objects.get_or_create(email = email)
     if not created:
         person.name = name
         person.email = email
