@@ -90,7 +90,8 @@
   'address' : '{{person.address}}',
   'country' : '{{person.country}}',
   'birth' : '{{person.birth}}',
-  'url' : 'https://cred-manager.herokuapp.com/{{person.uuid}}/',
+  'raw_url' : 'https://cred-manager.herokuapp.com/{{person.uuid}}/',
+  'edit_url' : 'https://cred-manager.herokuapp.com/{{person.uuid}}?edit=1',
  };
  var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
 
