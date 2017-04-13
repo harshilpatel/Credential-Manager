@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home),
     url(r'^submitData/', submitData),
+    url(r'^editData/', editData),
     url(r'^(?P<user_uuid>.*)', getData),
 ]

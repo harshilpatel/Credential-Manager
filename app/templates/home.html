@@ -12,60 +12,69 @@
    </div>
    <div class="panel-body">
     {%if person%}
-     <span><a href="/{{person.uuid}}">My Personal Crederntials</a></span>
+     <div class="alert alert-warning">Get you RAW Response here: <a href="/{{person.uuid}}">My Personal Credentials</a></div>
     {%endif%}
-    <form action="/submitData/" class="form form-horizontal" action="index.html" method="post">
-     {%csrf_token%}
-     <div class="col-lg-6">
-      <div class='form-group'>
-       <label for='name-id' class="control-label  col-md-4">Name</label>
-       <div class="col-md-8">
-        <input type='text' name="name" class='form-control' placeholder=''>
+    {%if person%}
+      <form action="/editData/" class="form form-horizontal" action="index.html" method="post">
+    {%else%}
+      <form action="/submitData/" class="form form-horizontal" action="index.html" method="post">
+    {%endif%}
+      {%csrf_token%}
+      <div class="col-lg-6">
+       <div class='form-group'>
+        <label for='name-id' class="control-label  col-md-4">Name</label>
+        <div class="col-md-8">
+         <input type='text' name="name" value="{{person.name}}" class='form-control' placeholder=''>
+        </div>
        </div>
-      </div>
-      <div class='form-group'>
-       <label for='name-id' class="control-label  col-md-4">Email</label>
-       <div class="col-md-8">
-        <input type='text' name="email" class='form-control' placeholder=''>
+       <div class='form-group'>
+        <label for='name-id' class="control-label  col-md-4">Email</label>
+        <div class="col-md-8">
+         <input type='text' name="email" value="{{person.email}}" class='form-control' placeholder=''>
+        </div>
        </div>
-      </div>
-      <div class='form-group'>
-       <label for='name-id' class="control-label  col-md-4">Phone</label>
-       <div class="col-md-8">
-        <input type='text' name="phone" class='form-control' placeholder=''>
+       <div class='form-group'>
+        <label for='name-id' class="control-label  col-md-4">Phone</label>
+        <div class="col-md-8">
+         <input type='text' name="phone" value="{{person.phone}}" class='form-control' placeholder=''>
+        </div>
        </div>
-      </div>
-      <div class='form-group'>
-       <label for='name-id' class="control-label  col-md-4">Address</label>
-       <div class="col-md-8">
-        <textarea name="address" rows="8" cols="40"></textarea>
+       <div class='form-group'>
+        <label for='name-id' class="control-label  col-md-4">Address</label>
+        <div class="col-md-8">
+         <textarea name="address" rows="8" cols="40" class="form-control">{{person.address}}</textarea>
+        </div>
        </div>
-      </div>
-      <div class='form-group'>
-       <label for='name-id' class="control-label  col-md-4">Country</label>
-       <div class="col-md-8">
-        <select class="form-control" name="country">
-         <option value="IN">India</option>
-         <option value="BAN">Bangladesh</option>
-         <option value="USA">USA</option>
-         <option value="AUS">Australia </option>
-        </select>
+       <div class='form-group'>
+        <label for='name-id' class="control-label  col-md-4">Country</label>
+        <div class="col-md-8">
+         <select class="form-control" name="country">
+          <option {%if person.country == "IN" %}selected{%endif%} value="IN">India</option>
+          <option {%if person.country == "BAN" %}selected{%endif%} value="BAN">Bangladesh</option>
+          <option {%if person.country == "USA" %}selected{%endif%} value="USA">USA</option>
+          <option {%if person.country == "AUS" %}selected{%endif%} value="AUS">Australia </option>
+         </select>
+        </div>
        </div>
-      </div>
-      <div class='form-group'>
-       <label for='name-id' class="control-label  col-md-4">Birth</label>
-       <div class="col-md-8">
-        <input type="date" name="birth" value="" class="form-control">
+       <div class='form-group'>
+        <label for='name-id' class="control-label  col-md-4">Birth</label>
+        <div class="col-md-8">
+         <input type="date" name="birth" value="{{person.birth}}" value="" class="form-control">
+        </div>
        </div>
-      </div>
-      <div class="text-center">
-       <button type='submit' class='btn btn-lg btn-default '>Submit</button>
+       <div class="text-center">
+        <button type='submit' class='btn btn-lg btn-default '>
+        {%if person%} Update
+        {%else%} Submit
+        {%endif%}
+       </button>
+       </div>
+
       </div>
 
-     </div>
 
+     </form>
 
-    </form>
    </div>
   </div>
  </div>
